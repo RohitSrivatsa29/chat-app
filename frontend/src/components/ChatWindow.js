@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { messageAPI, groupAPI } from '../services/api';
 import socketService from '../services/socket';
-import { Send, MoreVertical, Users, MessageCircle } from 'lucide-react';
+import { Send, MoreVertical, MessageCircle } from 'lucide-react';
 import { format, isToday, isYesterday } from 'date-fns';
 import './ChatWindow.css';
 
@@ -40,6 +40,7 @@ const ChatWindow = ({ chat, chatType, onlineUsers }) => {
         socketService.off('group:typing:status', handleGroupTypingStatus);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chat, chatType]);
 
   useEffect(() => {
@@ -104,7 +105,7 @@ const ChatWindow = ({ chat, chatType, onlineUsers }) => {
     // Send typing indicator
     if (chatType === 'direct') {
       socketService.startTyping(chat.id);
-      
+
       // Clear existing timeout
       if (typingTimeoutRef.current) {
         clearTimeout(typingTimeoutRef.current);
@@ -116,7 +117,7 @@ const ChatWindow = ({ chat, chatType, onlineUsers }) => {
       }, 2000);
     } else {
       socketService.startGroupTyping(chat.id);
-      
+
       if (typingTimeoutRef.current) {
         clearTimeout(typingTimeoutRef.current);
       }

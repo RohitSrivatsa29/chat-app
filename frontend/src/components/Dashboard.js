@@ -6,7 +6,6 @@ import ChatWindow from './ChatWindow';
 import './Dashboard.css';
 
 const Dashboard = () => {
-  const { user } = useAuth();
   const [selectedChat, setSelectedChat] = useState(null);
   const [chatType, setChatType] = useState(null); // 'direct' or 'group'
   const [onlineUsers, setOnlineUsers] = useState(new Set());
